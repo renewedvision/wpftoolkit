@@ -15,3 +15,5 @@ ExtendedWPFToolkitSolution/Src/Xceed.Wpf.Toolkit.LiveExplorer/obj
 ExtendedWPFToolkitSolution_35/.vs/Xceed.Wpf.Toolkit/v17
 ExtendedWPFToolkitSolution/.vs/Xceed.Wpf.Toolkit/v17
 *.vsidx
+ExtendedWPFToolkitSolution/.vs/ProjectEvaluation
+*.v2
