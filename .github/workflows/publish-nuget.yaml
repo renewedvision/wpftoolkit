@@ -55,7 +55,7 @@ jobs:
       - name: Package
         id: package
         run: |
-          dotnet pack -Version ${{ steps.generate-version.outputs.semantic-version }} -Properties NuGetBinaries=src\x64\release
+          dotnet pack ExtendedWPFToolkitSolution/Src/Xceed.Wpf.Toolkit/Xceed.Wpf.Toolkit.csproj -c Release --no-build -p:Version=${{ steps.generate-version.outputs.semantic-version }}
 
       - name: Publish Nuget to GitHub registry
         shell: powershell
