@@ -263,7 +263,16 @@ namespace Xceed.Wpf.Toolkit
         return this.Value;
       }
 
-      var cleanedText = Regex.Replace(text, "[^-0-9.,]", "", RegexOptions.Compiled, TimeSpan.FromMilliseconds(100));
+      var cleanedText = text;
+
+      var match = Regex.Match(FormatString, @"^([^\{]*)\{.*\}([^\}]*)$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(100));
+      if (match.Success)
+      {
+        if (cleanedText.Contains(match.Groups[1].Value))
+          cleanedText = cleanedText.Substring(match.Groups[1].Length);
+        if (match.Groups.Count == 3 && match.Groups[2].Length > 0 && cleanedText.Contains(match.Groups[2].Value))
+          cleanedText = cleanedText.Substring(0, cleanedText.Length - match.Groups[2].Length);
+      }
 
       result = this.ConvertTextToValueCore( currentValueText, cleanedText );
 
