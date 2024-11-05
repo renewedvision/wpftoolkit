@@ -268,10 +268,7 @@ namespace Xceed.Wpf.Toolkit
       var match = Regex.Match(FormatString, @"^([^\{]*)\{.*\}([^\}]*)$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(100));
       if (match.Success)
       {
-        if (cleanedText.Contains(match.Groups[1].Value))
-          cleanedText = cleanedText.Substring(match.Groups[1].Length);
-        if (match.Groups.Count == 3 && match.Groups[2].Length > 0 && cleanedText.Contains(match.Groups[2].Value))
-          cleanedText = cleanedText.Substring(0, cleanedText.Length - match.Groups[2].Length);
+        cleanedText = text.Substring(match.Groups[1].Length, text.Length - match.Groups[1].Length - match.Groups[2].Length);
       }
 
       result = this.ConvertTextToValueCore( currentValueText, cleanedText );
