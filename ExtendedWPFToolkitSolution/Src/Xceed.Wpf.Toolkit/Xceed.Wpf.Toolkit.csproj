@@ -9,7 +9,7 @@
   <PropertyGroup>
 	<!-- NUGET PACKAGE INFO-->
 	<Title>RenewedVision.Xceed.Wpf.Toolkit</Title>
-    <Version>3.8.0</Version>
+    <Version>3.8.1</Version>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<RepositoryUrl>https://github.com/renewedvision/wpftoolkit</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
