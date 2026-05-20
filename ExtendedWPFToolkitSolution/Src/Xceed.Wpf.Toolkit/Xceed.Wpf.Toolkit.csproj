@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net472;net8.0-windows;net9.0-windows;net10.0-windows</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
@@ -9,7 +9,7 @@
   <PropertyGroup>
 	<!-- NUGET PACKAGE INFO-->
 	<Title>RenewedVision.Xceed.Wpf.Toolkit</Title>
-    <Version>3.8.1</Version>
+    <Version>3.8.2</Version>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<RepositoryUrl>https://github.com/renewedvision/wpftoolkit</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
