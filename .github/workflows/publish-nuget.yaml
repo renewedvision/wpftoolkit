@@ -13,13 +13,13 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0 # get full History to make sure tags are included an thus git-describe works
 
       - name: Get version number
         id: version
-        uses: PaulHatch/semantic-version@v5.2.1
+        uses: PaulHatch/semantic-version@v6.0.2
 
       - name: Generate semver version number
         id: generate-version
@@ -39,13 +39,6 @@ jobs:
           echo assembly-version=${assembly_version} >> $env:GITHUB_OUTPUT
           echo semantic-version=${semver_version} >> $env:GITHUB_OUTPUT
 
-      - name: Setup .NET Core @ Latest
-        uses: actions/setup-dotnet@v3
-        with:
-          source-url: https://nuget.pkg.github.com/renewedvision/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}  
-
       - name: Build and Package
         id: build
         shell: powershell
@@ -54,7 +47,13 @@ jobs:
 
       - name: Publish Nuget to GitHub registry
         shell: powershell
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           foreach($file in (Get-ChildItem . -Recurse -Include *.nupkg)) {
-            dotnet nuget push $file --skip-duplicate
+            dotnet nuget push $file `
+              --source "https://nuget.pkg.github.com/renewedvision/index.json" `
+              --api-key $env:GITHUB_TOKEN `
+              --skip-duplicate `
+              --timeout 900
           }
