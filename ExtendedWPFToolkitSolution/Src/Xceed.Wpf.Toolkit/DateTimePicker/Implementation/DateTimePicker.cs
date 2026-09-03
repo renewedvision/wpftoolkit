@@ -291,6 +291,15 @@ namespace Xceed.Wpf.Toolkit
         ? newValue.Value.Date 
         : (DateTime?)null;
 
+      if( _timePicker != null )
+      {
+        // sync TimePicker.TempValue with current DatetimePicker.Value.
+        // Must run before Calendar.SelectedDate is set below: that setter re-enters
+        // Calendar_SelectedDatesChanged, which reads its time of day from TempValue and
+        // would otherwise pair the new date with the previous value's time.
+        _timePicker.UpdateTempValue( newValue );
+      }
+
       if( _calendar != null && _calendar.SelectedDate != newValueDate)
       {
         _calendar.SelectedDate = newValueDate;
@@ -304,12 +313,6 @@ namespace Xceed.Wpf.Toolkit
       {
         _calendarTemporaryDateTime = null;
         _calendarIntendedDateTime = null;
-      }
-
-      if( _timePicker != null )
-      {
-        // sync TimePicker.TempValue with current DatetimePicker.Value
-        _timePicker.UpdateTempValue( newValue );
       }
 
       base.OnValueChanged( oldValue, newValue );
